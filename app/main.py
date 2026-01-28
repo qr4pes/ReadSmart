@@ -25,10 +25,19 @@ app.add_middleware(
 # Include API routes
 app.include_router(router, prefix="/api", tags=["analysis"])
 
+# Simple root endpoint for health checking
+@app.get("/")
+async def root_page():
+    return {"message": "ReadSmart API is running", "status": "ok"}
+
 # Serve static frontend files - check multiple possible locations
 frontend_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
+print(f"Looking for frontend at: {frontend_path}")
+print(f"Frontend exists: {os.path.exists(frontend_path)}")
 if os.path.exists(frontend_path):
-    app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
+    # Mount at /app instead of / since we have a root endpoint
+    app.mount("/static", StaticFiles(directory=frontend_path, html=True), name="frontend")
+    print(f"Frontend mounted at /static")
 else:
     print(f"Warning: Frontend not found at {frontend_path}")
 
