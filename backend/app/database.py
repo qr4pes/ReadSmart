@@ -3,16 +3,19 @@ from sqlalchemy.orm import sessionmaker
 from .models import Base
 import os
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://analyzer_user:analyzer_pass@localhost:5432/website_analyzer"
-)
+def get_database_url():
+    url = os.getenv(
+        "DATABASE_URL",
+        "postgresql://analyzer_user:analyzer_pass@localhost:5432/website_analyzer"
+    )
+    # Railway uses postgres:// but SQLAlchemy needs postgresql://
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+    return url
 
-# Railway uses postgres:// but SQLAlchemy needs postgresql://
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+DATABASE_URL = get_database_url()
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(DATABASE_URL, pool_pre_ping=True, pool_recycle=300)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_db():

@@ -33,8 +33,12 @@ if os.path.exists(frontend_path):
 @app.on_event("startup")
 async def startup_event():
     """Initialize database on startup"""
-    init_db()
-    print("Database initialized successfully")
+    try:
+        init_db()
+        print("Database initialized successfully")
+    except Exception as e:
+        print(f"Database initialization warning: {e}")
+        print("App will continue - database will retry on first request")
 
 @app.get("/api")
 async def root():
