@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: website-analyzer-db
+    environment:
+      POSTGRES_USER: analyzer_user
+      POSTGRES_PASSWORD: analyzer_pass
+      POSTGRES_DB: website_analyzer
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U analyzer_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: website-analyzer-api
+    environment:
+      DATABASE_URL: postgresql://analyzer_user:analyzer_pass@postgres:5432/website_analyzer
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./frontend:/app/frontend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

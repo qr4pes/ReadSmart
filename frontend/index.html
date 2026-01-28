@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Content Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🔍 Website Content Analyzer</h1>
+            <p class="subtitle">Analyze website credibility, detect propaganda, and understand content context</p>
+        </header>
+
+        <!-- Main Analysis Section -->
+        <main>
+            <div class="analysis-form">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        id="urlInput"
+                        placeholder="Enter website URL (e.g., https://example.com/article)"
+                        autocomplete="off"
+                    >
+                    <button id="analyzeBtn" class="btn-primary">Analyze</button>
+                </div>
+                <p class="hint">Enter any website URL to analyze its content for credibility and potential bias</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state hidden">
+                <div class="spinner"></div>
+                <p>Analyzing website content...</p>
+                <p class="loading-subtext">This may take 30-60 seconds depending on content length</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state hidden">
+                <div class="error-icon">⚠️</div>
+                <h3>Analysis Failed</h3>
+                <p id="errorMessage"></p>
+                <button id="retryBtn" class="btn-secondary">Try Again</button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section hidden">
+                <!-- Credibility Score -->
+                <div class="result-card score-card">
+                    <h2>Credibility Score</h2>
+                    <div class="score-display">
+                        <div class="score-circle" id="scoreCircle">
+                            <span id="scoreValue">--</span>
+                            <span class="score-label">/100</span>
+                        </div>
+                        <p id="scoreInterpretation" class="score-interpretation"></p>
+                    </div>
+                </div>
+
+                <!-- Quick Assessment Grid -->
+                <div class="assessment-grid">
+                    <div class="assessment-card">
+                        <div class="assessment-icon">📰</div>
+                        <h3>Context Accuracy</h3>
+                        <div id="contextStatus" class="status-badge">--</div>
+                        <p id="contextExplanation" class="explanation"></p>
+                    </div>
+
+                    <div class="assessment-card">
+                        <div class="assessment-icon">🎯</div>
+                        <h3>Propaganda Detection</h3>
+                        <div id="propagandaStatus" class="status-badge">--</div>
+                        <p id="propagandaExplanation" class="explanation"></p>
+                    </div>
+                </div>
+
+                <!-- Content Context -->
+                <div class="result-card">
+                    <h3>Content Overview</h3>
+                    <p id="contentContext" class="content-description"></p>
+                </div>
+
+                <!-- Detailed Analysis -->
+                <div class="result-card detailed-analysis">
+                    <h3>Detailed Analysis</h3>
+
+                    <div class="analysis-section" id="keyConcernsSection">
+                        <h4>🔴 Key Concerns</h4>
+                        <ul id="keyConcernsList" class="concerns-list"></ul>
+                    </div>
+
+                    <div class="analysis-section" id="positiveIndicatorsSection">
+                        <h4>🟢 Positive Indicators</h4>
+                        <ul id="positiveIndicatorsList" class="indicators-list"></ul>
+                    </div>
+
+                    <div class="analysis-section" id="summarySection">
+                        <h4>Summary</h4>
+                        <p id="summaryText"></p>
+                    </div>
+                </div>
+
+                <!-- Analysis Metadata -->
+                <div class="metadata">
+                    <span id="analyzedUrl"></span>
+                    <span id="analysisDuration"></span>
+                    <span id="requestId"></span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button id="newAnalysisBtn" class="btn-primary">Analyze Another URL</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>Powered by AI | Educational purposes only | Always verify information from multiple sources</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
