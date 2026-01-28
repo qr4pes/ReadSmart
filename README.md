@@ -371,3 +371,4 @@ For issues or questions:
 1. Check the troubleshooting section
 2. Review API documentation at http://localhost:8000/docs
 3. Check application logs
+# ReadSmart
