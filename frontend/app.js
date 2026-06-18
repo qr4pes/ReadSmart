@@ -47,8 +47,12 @@ async function handleAnalyze() {
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || 'Analysis failed');
+            let errorMessage = 'Analysis failed. Please try again.';
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.detail || errorMessage;
+            } catch {}
+            throw new Error(errorMessage);
         }
 
         const data = await response.json();
