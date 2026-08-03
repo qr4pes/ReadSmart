@@ -4,24 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReadSmart - AI Content Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>📖 ReadSmart</h1>
-            <p class="subtitle">AI-powered content analysis for checking news accuracy</p>
-        </header>
+    <nav>
+        <span class="brand">ReadSmart</span>
+    </nav>
 
-        <!-- Main Analysis Section -->
-        <main>
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Read Smarter.<br>Think Critically.</h1>
+            <div class="hero-right">
+                <p>Paste any news article or website URL for an instant AI-powered breakdown of its credibility, bias, and accuracy.</p>
+                <a href="#analyze" class="btn-outline">Get Started</a>
+            </div>
+        </section>
+
+        <!-- Analysis Form -->
+        <main id="analyze">
             <div class="analysis-form">
                 <div class="input-group">
                     <input
                         type="text"
                         id="urlInput"
-                        placeholder="Enter website URL (e.g., https://example.com/article)"
+                        placeholder="Enter a website URL to analyze..."
                         autocomplete="off"
                     >
                     <button id="analyzeBtn" class="btn-primary">Analyze</button>
@@ -33,15 +43,14 @@
             <div id="loadingState" class="loading-state hidden">
                 <div class="spinner"></div>
                 <p>Analyzing website content...</p>
-                <p class="loading-subtext">This may take 30-60 seconds depending on content length</p>
+                <p class="loading-subtext">This may take 30–60 seconds depending on content length</p>
             </div>
 
             <!-- Error State -->
             <div id="errorState" class="error-state hidden">
-                <div class="error-icon">⚠️</div>
                 <h3>Analysis Failed</h3>
                 <p id="errorMessage"></p>
-                <button id="retryBtn" class="btn-secondary">Try Again</button>
+                <button id="retryBtn" class="btn-outline">Try Again</button>
             </div>
 
             <!-- Results Section -->
@@ -61,21 +70,19 @@
                 <!-- Quick Assessment Grid -->
                 <div class="assessment-grid">
                     <div class="assessment-card">
-                        <div class="assessment-icon">📰</div>
                         <h3>Context Accuracy</h3>
                         <div id="contextStatus" class="status-badge">--</div>
                         <p id="contextExplanation" class="explanation"></p>
                     </div>
 
                     <div class="assessment-card">
-                        <div class="assessment-icon">🎯</div>
                         <h3>Propaganda Detection</h3>
                         <div id="propagandaStatus" class="status-badge">--</div>
                         <p id="propagandaExplanation" class="explanation"></p>
                     </div>
                 </div>
 
-                <!-- Content Context -->
+                <!-- Content Overview -->
                 <div class="result-card">
                     <h3>Content Overview</h3>
                     <p id="contentContext" class="content-description"></p>
@@ -86,12 +93,12 @@
                     <h3>Detailed Analysis</h3>
 
                     <div class="analysis-section" id="keyConcernsSection">
-                        <h4>🔴 Key Concerns</h4>
+                        <h4>Key Concerns</h4>
                         <ul id="keyConcernsList" class="concerns-list"></ul>
                     </div>
 
                     <div class="analysis-section" id="positiveIndicatorsSection">
-                        <h4>🟢 Positive Indicators</h4>
+                        <h4>Positive Indicators</h4>
                         <ul id="positiveIndicatorsList" class="indicators-list"></ul>
                     </div>
 
@@ -101,7 +108,7 @@
                     </div>
                 </div>
 
-                <!-- Analysis Metadata -->
+                <!-- Metadata -->
                 <div class="metadata">
                     <span id="analyzedUrl"></span>
                     <span id="analysisDuration"></span>
@@ -117,7 +124,7 @@
 
         <!-- Footer -->
         <footer>
-            <p>Powered by AI | Educational purposes only | Always verify information from multiple sources</p>
+            <p>Powered by AI &nbsp;&middot;&nbsp; Always verify information from multiple sources</p>
         </footer>
     </div>
 
